@@ -7,12 +7,12 @@ import jakarta.enterprise.inject.Model;
 import java.util.List;
 
 @Model
-public class PlanesRepo implements PanacheRepositoryBase<Planes, Long> {
+public class PlanesRepo implements PanacheRepositoryBase<Planes, Integer> {
     public List<Planes> findByModel(String model) {
         return list("model", model);
     }
 
-    public List<Planes> findByRegistration(String registration) {
-        return list("registration", registration);
+    public Planes findByRegistration(String registration) {
+        return find("registration", registration).firstResult();
     }
 }

@@ -32,7 +32,7 @@ public class PlaneResources extends GenericResource {
     @GET
     @Path("/{registration}")
     public Response getPlaneByRegistration(@PathParam("registration") String registration) {
-        List<Planes> plane = planeRepository.findByRegistration(registration);
+        Planes plane = planeRepository.findByRegistration(registration);
         return getOr404(plane);
     }
 
@@ -47,7 +47,7 @@ public class PlaneResources extends GenericResource {
     @Transactional
     @Path("/{registration}")
     public Response deletePlane(@PathParam("registration") String registration) {
-        Planes existingPlane = planeRepository.findById(Long.valueOf(registration));
+        Planes existingPlane = planeRepository.findByRegistration(registration);
         if (existingPlane == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
